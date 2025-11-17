@@ -23,10 +23,6 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       {
-        text: 'Laravel开源后台',
-        link: 'https://github.com/JaguarJack/catch-admin'
-      },
-      {
         text: '11.x',
         items: [
           { text: '12.x', link: '/docs/12/prologue/releases' },
@@ -59,7 +55,7 @@ export default defineConfig({
     lastUpdated: {
       text: '最近更新'
     },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/JaguarJack/laravel-chinese-document' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/chenggx/laravel-chinese-document' }],
     search: {
       provider: 'local'
     }
