@@ -35,7 +35,7 @@ To prevent this vulnerability, we need to inspect every incoming `POST`, `PUT`, 
 <a name="preventing-csrf-requests"></a>
 ## Preventing CSRF Requests
 
-Laravel automatically generates a CSRF "token" for each active [user session](/docs/{{version}}/session) managed by the application. This token is used to verify that the authenticated user is the person actually making the requests to the application. Since this token is stored in the user's session and changes each time the session is regenerated, a malicious application is unable to access it.
+Laravel automatically generates a CSRF "token" for each active [user session](/docs/{{version}}/basics/session) managed by the application. This token is used to verify that the authenticated user is the person actually making the requests to the application. Since this token is stored in the user's session and changes each time the session is regenerated, a malicious application is unable to access it.
 
 The current session's CSRF token can be accessed via the request's session or via the `csrf_token` helper function:
 
@@ -62,12 +62,12 @@ Anytime you define a "POST", "PUT", "PATCH", or "DELETE" HTML form in your appli
 </form>
 ```
 
-The `Illuminate\Foundation\Http\Middleware\ValidateCsrfToken` [middleware](/docs/{{version}}/middleware), which is included in the `web` middleware group by default, will automatically verify that the token in the request input matches the token stored in the session. When these two tokens match, we know that the authenticated user is the one initiating the request.
+The `Illuminate\Foundation\Http\Middleware\ValidateCsrfToken` [middleware](/docs/{{version}}/basics/middleware), which is included in the `web` middleware group by default, will automatically verify that the token in the request input matches the token stored in the session. When these two tokens match, we know that the authenticated user is the one initiating the request.
 
 <a name="csrf-tokens-and-spas"></a>
 ### CSRF Tokens & SPAs
 
-If you are building an SPA that is utilizing Laravel as an API backend, you should consult the [Laravel Sanctum documentation](/docs/{{version}}/sanctum) for information on authenticating with your API and protecting against CSRF vulnerabilities.
+If you are building an SPA that is utilizing Laravel as an API backend, you should consult the [Laravel Sanctum documentation](/docs/{{version}}/packages/sanctum) for information on authenticating with your API and protecting against CSRF vulnerabilities.
 
 <a name="csrf-excluding-uris"></a>
 ### Excluding URIs From CSRF Protection
@@ -87,7 +87,7 @@ Typically, you should place these kinds of routes outside of the `web` middlewar
 ```
 
 > [!NOTE]
-> For convenience, the CSRF middleware is automatically disabled for all routes when [running tests](/docs/{{version}}/testing).
+> For convenience, the CSRF middleware is automatically disabled for all routes when [running tests](/docs/{{version}}/testing/testing).
 
 <a name="csrf-x-csrf-token"></a>
 ## X-CSRF-TOKEN

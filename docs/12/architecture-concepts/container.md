@@ -80,7 +80,7 @@ Route::get('/', function (Service $service) {
 
 In this example, hitting your application's `/` route will automatically resolve the `Service` class and inject it into your route's handler. This is game changing. It means you can develop your application and take advantage of dependency injection without worrying about bloated configuration files.
 
-Thankfully, many of the classes you will be writing when building a Laravel application automatically receive their dependencies via the container, including [controllers](/docs/{{version}}/controllers), [event listeners](/docs/{{version}}/events), [middleware](/docs/{{version}}/middleware), and more. Additionally, you may type-hint dependencies in the `handle` method of [queued jobs](/docs/{{version}}/queues). Once you taste the power of automatic and zero configuration dependency injection it feels impossible to develop without it.
+Thankfully, many of the classes you will be writing when building a Laravel application automatically receive their dependencies via the container, including [controllers](/docs/{{version}}/basics/controllers), [event listeners](/docs/{{version}}/digging-deeper/events), [middleware](/docs/{{version}}/basics/middleware), and more. Additionally, you may type-hint dependencies in the `handle` method of [queued jobs](/docs/{{version}}/digging-deeper/queues). Once you taste the power of automatic and zero configuration dependency injection it feels impossible to develop without it.
 
 <a name="when-to-use-the-container"></a>
 ### When to Utilize the Container
@@ -95,9 +95,9 @@ Route::get('/', function (Request $request) {
 });
 ```
 
-In many cases, thanks to automatic dependency injection and [facades](/docs/{{version}}/facades), you can build Laravel applications without **ever** manually binding or resolving anything from the container. **So, when would you ever manually interact with the container?** Let's examine two situations.
+In many cases, thanks to automatic dependency injection and [facades](/docs/{{version}}/architecture-concepts/facades), you can build Laravel applications without **ever** manually binding or resolving anything from the container. **So, when would you ever manually interact with the container?** Let's examine two situations.
 
-First, if you write a class that implements an interface and you wish to type-hint that interface on a route or class constructor, you must [tell the container how to resolve that interface](#binding-interfaces-to-implementations). Secondly, if you are [writing a Laravel package](/docs/{{version}}/packages) that you plan to share with other Laravel developers, you may need to bind your package's services into the container.
+First, if you write a class that implements an interface and you wish to type-hint that interface on a route or class constructor, you must [tell the container how to resolve that interface](#binding-interfaces-to-implementations). Secondly, if you are [writing a Laravel package](/docs/{{version}}/digging-deeper/packages) that you plan to share with other Laravel developers, you may need to bind your package's services into the container.
 
 <a name="binding"></a>
 ## Binding
@@ -108,7 +108,7 @@ First, if you write a class that implements an interface and you wish to type-hi
 <a name="simple-bindings"></a>
 #### Simple Bindings
 
-Almost all of your service container bindings will be registered within [service providers](/docs/{{version}}/providers), so most of these examples will demonstrate using the container in that context.
+Almost all of your service container bindings will be registered within [service providers](/docs/{{version}}/architecture-conceptsproviders), so most of these examples will demonstrate using the container in that context.
 
 Within a service provider, you always have access to the container via the `$this->app` property. We can register a binding using the `bind` method, passing the class or interface name that we wish to register along with a closure that returns an instance of the class:
 
@@ -124,7 +124,7 @@ $this->app->bind(Transistor::class, function (Application $app) {
 
 Note that we receive the container itself as an argument to the resolver. We can then use the container to resolve sub-dependencies of the object we are building.
 
-As mentioned, you will typically be interacting with the container within service providers; however, if you would like to interact with the container outside of a service provider, you may do so via the `App` [facade](/docs/{{version}}/facades):
+As mentioned, you will typically be interacting with the container within service providers; however, if you would like to interact with the container outside of a service provider, you may do so via the `App` [facade](/docs/{{version}}/architecture-concepts/facades):
 
 ```php
 use App\Services\Transistor;
@@ -200,7 +200,7 @@ class Transistor
 <a name="binding-scoped"></a>
 #### Binding Scoped Singletons
 
-The `scoped` method binds a class or interface into the container that should only be resolved one time within a given Laravel request / job lifecycle. While this method is similar to the `singleton` method, instances registered using the `scoped` method will be flushed whenever the Laravel application starts a new "lifecycle", such as when a [Laravel Octane](/docs/{{version}}/octane) worker processes a new request or when a Laravel [queue worker](/docs/{{version}}/queues) processes a new job:
+The `scoped` method binds a class or interface into the container that should only be resolved one time within a given Laravel request / job lifecycle. While this method is similar to the `singleton` method, instances registered using the `scoped` method will be flushed whenever the Laravel application starts a new "lifecycle", such as when a [Laravel Octane](/docs/{{version}}/digging-deeper/packages/octane) worker processes a new request or when a Laravel [queue worker](/docs/{{version}}/digging-deeper/queues) processes a new job:
 
 ```php
 use App\Services\Transistor;
@@ -320,7 +320,7 @@ interface EventPusher
 <a name="contextual-binding"></a>
 ### Contextual Binding
 
-Sometimes you may have two classes that utilize the same interface, but you wish to inject different implementations into each class. For example, two controllers may depend on different implementations of the `Illuminate\Contracts\Filesystem\Filesystem` [contract](/docs/{{version}}/contracts). Laravel provides a simple, fluent interface for defining this behavior:
+Sometimes you may have two classes that utilize the same interface, but you wish to inject different implementations into each class. For example, two controllers may depend on different implementations of the `Illuminate\Contracts\Filesystem\Filesystem` [contract](/docs/{{version}}/digging-deeper/contracts). Laravel provides a simple, fluent interface for defining this behavior:
 
 ```php
 use App\Http\Controllers\PhotoController;
@@ -347,7 +347,7 @@ $this->app->when([VideoController::class, UploadController::class])
 
 Since contextual binding is often used to inject implementations of drivers or configuration values, Laravel offers a variety of contextual binding attributes that allow to inject these types of values without manually defining the contextual bindings in your service providers.
 
-For example, the `Storage` attribute may be used to inject a specific [storage disk](/docs/{{version}}/filesystem):
+For example, the `Storage` attribute may be used to inject a specific [storage disk](/docs/{{version}}/digging-deeper/filesystem):
 
 ```php
 <?php
@@ -623,7 +623,7 @@ if ($this->app->bound(Transistor::class)) {
 }
 ```
 
-If you are outside of a service provider in a location of your code that does not have access to the `$app` variable, you may use the `App` [facade](/docs/{{version}}/facades) or the `app` [helper](/docs/{{version}}/helpers#method-app) to resolve a class instance from the container:
+If you are outside of a service provider in a location of your code that does not have access to the `$app` variable, you may use the `App` [facade](/docs/{{version}}/architecture-concepts/facades) or the `app` [helper](/docs/{{version}}/digging-deeper/helpers#method-app) to resolve a class instance from the container:
 
 ```php
 use App\Services\Transistor;
@@ -650,7 +650,7 @@ public function __construct(
 <a name="automatic-injection"></a>
 ### Automatic Injection
 
-Alternatively, and importantly, you may type-hint the dependency in the constructor of a class that is resolved by the container, including [controllers](/docs/{{version}}/controllers), [event listeners](/docs/{{version}}/events), [middleware](/docs/{{version}}/middleware), and more. Additionally, you may type-hint dependencies in the `handle` method of [queued jobs](/docs/{{version}}/queues). In practice, this is how most of your objects should be resolved by the container.
+Alternatively, and importantly, you may type-hint the dependency in the constructor of a class that is resolved by the container, including [controllers](/docs/{{version}}/basics/controllers), [event listeners](/docs/{{version}}/digging-deeper/events), [middleware](/docs/{{version}}/basics/middleware), and more. Additionally, you may type-hint dependencies in the `handle` method of [queued jobs](/docs/{{version}}/digging-deeper/queues). In practice, this is how most of your objects should be resolved by the container.
 
 For example, you may type-hint a service defined by your application in a controller's constructor. The service will automatically be resolved and injected into the class:
 

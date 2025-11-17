@@ -2,6 +2,24 @@ import { defineConfig } from 'vitepress'
 import version11 from './siders/version11'
 import version12 from './siders/version12'
 
+
+const versionReplacePlugin = () => ({
+  name: 'vite-plugin-replace-version',
+  enforce: 'pre',                 // 越早执行越好
+  transform(src, id) {
+    if (!id.endsWith('.md')) return          // 只处理 Markdown
+    if (!id.includes('/docs/')) return       // 只处理 docs 目录
+
+    let version = ''
+    if (id.includes('/docs/11/')) version = '11'
+    if (id.includes('/docs/12/')) version = '12'
+    if (!version) return                     // 未匹配到版本就跳过
+
+    // 全局替换 {{version}} → 11/12
+    return src.replace(/\{\{version\}\}/g, version)
+  }
+})
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Laravel 中文文档',
@@ -13,6 +31,9 @@ export default defineConfig({
   rewrites: {
     '11/(.*)': 'docs/11/(.*)',
     '12/(.*)': 'docs/12/(.*)'
+  },
+   vite: {
+    plugins: [versionReplacePlugin()]
   },
   sitemap: {
     hostname: 'https://laravel-docs.catchadmin.com/'

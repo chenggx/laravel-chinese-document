@@ -153,7 +153,7 @@ $instance = Feature::instance(NewApi::class);
 ```
 
 > [!NOTE]
-> Feature classes are resolved via the [container](/docs/{{version}}/container), so you may inject dependencies into the feature class's constructor when needed.
+> Feature classes are resolved via the [container](/docs/{{version}}/architecture-concepts/container), so you may inject dependencies into the feature class's constructor when needed.
 
 #### Customizing the Stored Feature Name
 
@@ -386,7 +386,7 @@ To make checking features in Blade a seamless experience, Pennant offers the `@f
 <a name="middleware"></a>
 ### Middleware
 
-Pennant also includes a [middleware](/docs/{{version}}/middleware) that may be used to verify the currently authenticated user has access to a feature before a route is even invoked. You may assign the middleware to a route and specify the features that are required to access the route. If any of the specified features are inactive for the currently authenticated user, a `400 Bad Request` HTTP response will be returned by the route. Multiple features may be passed to the static `using` method.
+Pennant also includes a [middleware](/docs/{{version}}/basics/middleware) that may be used to verify the currently authenticated user has access to a feature before a route is even invoked. You may assign the middleware to a route and specify the features that are required to access the route. If any of the specified features are inactive for the currently authenticated user, a `400 Bad Request` HTTP response will be returned by the route. Multiple features may be passed to the static `using` method.
 
 ```php
 use Illuminate\Support\Facades\Route;
@@ -647,7 +647,7 @@ class User extends Model implements FeatureScopeable
 <a name="serializing-scope"></a>
 ### Serializing Scope
 
-By default, Pennant will use a fully qualified class name when storing a feature associated with an Eloquent model. If you are already using an [Eloquent morph map](/docs/{{version}}/eloquent-relationships#custom-polymorphic-types), you may choose to have Pennant also use the morph map to decouple the stored feature from your application structure.
+By default, Pennant will use a fully qualified class name when storing a feature associated with an Eloquent model. If you are already using an [Eloquent morph map](/docs/{{version}}/eloquent/eloquent-relationships#custom-polymorphic-types), you may choose to have Pennant also use the morph map to decouple the stored feature from your application structure.
 
 To achieve this, after defining your Eloquent morph map in a service provider, you may invoke the `Feature` facade's `useMorphMap` method:
 
@@ -987,7 +987,7 @@ public function test_it_can_control_feature_values()
 }
 ```
 
-If your feature is returning a `Lottery` instance, there are a handful of useful [testing helpers available](/docs/{{version}}/helpers#testing-lotteries).
+If your feature is returning a `Lottery` instance, there are a handful of useful [testing helpers available](/docs/{{version}}/digging-deeper/helpers#testing-lotteries).
 
 <a name="store-configuration"></a>
 #### Store Configuration
@@ -1041,7 +1041,7 @@ Now, we just need to implement each of these methods using a Redis connection. F
 <a name="registering-the-driver"></a>
 #### Registering the Driver
 
-Once your driver has been implemented, you are ready to register it with Laravel. To add additional drivers to Pennant, you may use the `extend` method provided by the `Feature` facade. You should call the `extend` method from the `boot` method of one of your application's [service provider](/docs/{{version}}/providers):
+Once your driver has been implemented, you are ready to register it with Laravel. To add additional drivers to Pennant, you may use the `extend` method provided by the `Feature` facade. You should call the `extend` method from the `boot` method of one of your application's [service provider](/docs/{{version}}/architecture-concepts/providers):
 
 ```php
 <?php

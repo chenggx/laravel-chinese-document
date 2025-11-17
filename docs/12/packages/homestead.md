@@ -37,7 +37,7 @@
 ## Introduction
 
 > [!WARNING]
-> Laravel Homestead is a legacy package that is no longer actively maintained. [Laravel Sail](/docs/{{version}}/sail) may be used as a modern alternative.
+> Laravel Homestead is a legacy package that is no longer actively maintained. [Laravel Sail](/docs/{{version}}/packages/sail) may be used as a modern alternative.
 
 Laravel strives to make the entire PHP development experience delightful, including your local development environment. [Laravel Homestead](https://github.com/laravel/homestead) is an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, or any other server software on your local machine.
 
@@ -632,7 +632,7 @@ Once configured, Homestead will export your databases to `.backup/mysql_backup` 
 <a name="configuring-cron-schedules"></a>
 ### Configuring Cron Schedules
 
-Laravel provides a convenient way to [schedule cron jobs](/docs/{{version}}/scheduling) by scheduling a single `schedule:run` Artisan command to run every minute. The `schedule:run` command will examine the job schedule defined in your `routes/console.php` file to determine which scheduled tasks to run.
+Laravel provides a convenient way to [schedule cron jobs](/docs/{{version}}/digging-deeper/scheduling) by scheduling a single `schedule:run` Artisan command to run every minute. The `schedule:run` command will examine the job schedule defined in your `routes/console.php` file to determine which scheduled tasks to run.
 
 If you would like the `schedule:run` command to be run for a Homestead site, you may set the `schedule` option to `true` when defining the site:
 
@@ -695,7 +695,7 @@ Supported `policy` values include: `none`, `download`, `upload`, and `public`.
 <a name="laravel-dusk"></a>
 ### Laravel Dusk
 
-In order to run [Laravel Dusk](/docs/{{version}}/dusk) tests within Homestead, you should enable the [webdriver feature](#installing-optional-features) in your Homestead configuration:
+In order to run [Laravel Dusk](/docs/{{version}}/testing/testing/dusk) tests within Homestead, you should enable the [webdriver feature](#installing-optional-features) in your Homestead configuration:
 
 ```yaml
 features:

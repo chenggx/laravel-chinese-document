@@ -16,7 +16,7 @@ Laravel provides helpful methods for mocking events, jobs, and other facades out
 <a name="mocking-objects"></a>
 ## Mocking Objects
 
-When mocking an object that is going to be injected into your application via Laravel's [service container](/docs/{{version}}/container), you will need to bind your mocked instance into the container as an `instance` binding. This will instruct the container to use your mocked instance of the object instead of constructing the object itself:
+When mocking an object that is going to be injected into your application via Laravel's [service container](/docs/{{version}}/architecture-concepts/container), you will need to bind your mocked instance into the container as an `instance` binding. This will instruct the container to use your mocked instance of the object instead of constructing the object itself:
 
 ```php tab=Pest
 use App\Service;
@@ -86,7 +86,7 @@ $spy->shouldHaveReceived('process');
 <a name="mocking-facades"></a>
 ## Mocking Facades
 
-Unlike traditional static method calls, [facades](/docs/{{version}}/facades) (including [real-time facades](/docs/{{version}}/facades#real-time-facades)) may be mocked. This provides a great advantage over traditional static methods and grants you the same testability that you would have if you were using traditional dependency injection. When testing, you may often want to mock a call to a Laravel facade that occurs in one of your controllers. For example, consider the following controller action:
+Unlike traditional static method calls, [facades](/docs/{{version}}/architecture-concepts/facades) (including [real-time facades](/docs/{{version}}/architecture-concepts/facades#real-time-facades)) may be mocked. This provides a great advantage over traditional static methods and grants you the same testability that you would have if you were using traditional dependency injection. When testing, you may often want to mock a call to a Laravel facade that occurs in one of your controllers. For example, consider the following controller action:
 
 ```php
 <?php
@@ -111,7 +111,7 @@ class UserController extends Controller
 }
 ```
 
-We can mock the call to the `Cache` facade by using the `expects` method, which will return an instance of a [Mockery](https://github.com/padraic/mockery) mock. Since facades are actually resolved and managed by the Laravel [service container](/docs/{{version}}/container), they have much more testability than a typical static class. For example, let's mock our call to the `Cache` facade's `get` method:
+We can mock the call to the `Cache` facade by using the `expects` method, which will return an instance of a [Mockery](https://github.com/padraic/mockery) mock. Since facades are actually resolved and managed by the Laravel [service container](/docs/{{version}}/architecture-concepts/container), they have much more testability than a typical static class. For example, let's mock our call to the `Cache` facade's `get` method:
 
 ```php tab=Pest
 <?php
@@ -153,7 +153,7 @@ class UserControllerTest extends TestCase
 ```
 
 > [!WARNING]
-> You should not mock the `Request` facade. Instead, pass the input you desire into the [HTTP testing methods](/docs/{{version}}/http-tests) such as `get` and `post` when running your test. Likewise, instead of mocking the `Config` facade, call the `Config::set` method in your tests.
+> You should not mock the `Request` facade. Instead, pass the input you desire into the [HTTP testing methods](/docs/{{version}}/testing/testing/http-tests) such as `get` and `post` when running your test. Likewise, instead of mocking the `Config` facade, call the `Config::set` method in your tests.
 
 <a name="facade-spies"></a>
 ### Facade Spies

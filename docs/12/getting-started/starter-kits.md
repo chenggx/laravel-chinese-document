@@ -19,14 +19,14 @@
 <a name="introduction"></a>
 ## Introduction
 
-To give you a head start building your new Laravel application, we are happy to offer [application starter kits](https://laravel.com/starter-kits). These starter kits give you a head start on building your next Laravel application, and include the routes, controllers, and views you need to register and authenticate your application's users. The starter kits use [Laravel Fortify](/docs/{{version}}/fortify) to provide authentication.
+To give you a head start building your new Laravel application, we are happy to offer [application starter kits](https://laravel.com/starter-kits). These starter kits give you a head start on building your next Laravel application, and include the routes, controllers, and views you need to register and authenticate your application's users. The starter kits use [Laravel Fortify](/docs/{{version}}/packages/fortify) to provide authentication.
 
 While you are welcome to use these starter kits, they are not required. You are free to build your own application from the ground up by simply installing a fresh copy of Laravel. Either way, we know you will build something great!
 
 <a name="creating-an-application"></a>
 ## Creating an Application Using a Starter Kit
 
-To create a new Laravel application using one of our starter kits, you should first [install PHP and the Laravel CLI tool](/docs/{{version}}/installation#installing-php). If you already have PHP and Composer installed, you may install the Laravel installer CLI tool via Composer:
+To create a new Laravel application using one of our starter kits, you should first [install PHP and the Laravel CLI tool](/docs/{{version}}/getting-started/installation#installing-php). If you already have PHP and Composer installed, you may install the Laravel installer CLI tool via Composer:
 
 ```shell
 composer global require laravel/installer
@@ -273,9 +273,9 @@ To change your authentication layout, modify the layout that is used by your app
 <a name="two-factor-authentication"></a>
 ## Two-Factor Authentication
 
-All starter kits include built-in two-factor authentication (2FA) powered by [Laravel Fortify](/docs/{{version}}/fortify#two-factor-authentication), adding an extra layer of security to user accounts. Users can protect their accounts using any Time-based One-Time Password (TOTP) supporting authenticator application.
+All starter kits include built-in two-factor authentication (2FA) powered by [Laravel Fortify](/docs/{{version}}/packages/fortify#two-factor-authentication), adding an extra layer of security to user accounts. Users can protect their accounts using any Time-based One-Time Password (TOTP) supporting authenticator application.
 
-Two-factor authentication is enabled by default and supports all options provided by [Fortify](/docs/{{version}}/fortify#two-factor-authentication):
+Two-factor authentication is enabled by default and supports all options provided by [Fortify](/docs/{{version}}/packages/fortify#two-factor-authentication):
 
 ```php
 Features::twoFactorAuthentication([

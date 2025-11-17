@@ -841,7 +841,7 @@ class ExampleTest extends TestCase
 }
 ```
 
-By default, the `fake` method will delete all files in its temporary directory. If you would like to keep these files, you may use the "persistentFake" method instead. For more information on testing file uploads, you may consult the [HTTP testing documentation's information on file uploads](/docs/{{version}}/http-tests#testing-file-uploads).
+By default, the `fake` method will delete all files in its temporary directory. If you would like to keep these files, you may use the "persistentFake" method instead. For more information on testing file uploads, you may consult the [HTTP testing documentation's information on file uploads](/docs/{{version}}/testing/testing/http-tests#testing-file-uploads).
 
 > [!WARNING]
 > The `image` method requires the [GD extension](https://www.php.net/manual/en/book.image.php).
@@ -857,7 +857,7 @@ In order to define a custom filesystem you will need a Flysystem adapter. Let's 
 composer require spatie/flysystem-dropbox
 ```
 
-Next, you can register the driver within the `boot` method of one of your application's [service providers](/docs/{{version}}/providers). To accomplish this, you should use the `extend` method of the `Storage` facade:
+Next, you can register the driver within the `boot` method of one of your application's [service providers](/docs/{{version}}/architecture-concepts/providers). To accomplish this, you should use the `extend` method of the `Storage` facade:
 
 ```php
 <?php

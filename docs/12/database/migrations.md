@@ -29,12 +29,12 @@
 
 Migrations are like version control for your database, allowing your team to define and share the application's database schema definition. If you have ever had to tell a teammate to manually add a column to their local database schema after pulling in your changes from source control, you've faced the problem that database migrations solve.
 
-The Laravel `Schema` [facade](/docs/{{version}}/facades) provides database agnostic support for creating and manipulating tables across all of Laravel's supported database systems. Typically, migrations will use this facade to create and modify database tables and columns.
+The Laravel `Schema` [facade](/docs/{{version}}/architecture-concepts/facades) provides database agnostic support for creating and manipulating tables across all of Laravel's supported database systems. Typically, migrations will use this facade to create and modify database tables and columns.
 
 <a name="generating-migrations"></a>
 ## Generating Migrations
 
-You may use the `make:migration` [Artisan command](/docs/{{version}}/artisan) to generate a database migration. The new migration will be placed in your `database/migrations` directory. Each migration filename contains a timestamp that allows Laravel to determine the order of the migrations:
+You may use the `make:migration` [Artisan command](/docs/{{version}}/digging-deeper/artisan) to generate a database migration. The new migration will be placed in your `database/migrations` directory. Each migration filename contains a timestamp that allows Laravel to determine the order of the migrations:
 
 ```shell
 php artisan make:migration create_flights_table
@@ -45,7 +45,7 @@ Laravel will use the name of the migration to attempt to guess the name of the t
 If you would like to specify a custom path for the generated migration, you may use the `--path` option when executing the `make:migration` command. The given path should be relative to your application's base path.
 
 > [!NOTE]
-> Migration stubs may be customized using [stub publishing](/docs/{{version}}/artisan#stub-customization).
+> Migration stubs may be customized using [stub publishing](/docs/{{version}}/digging-deeper/artisan#stub-customization).
 
 <a name="squashing-migrations"></a>
 ### Squashing Migrations
@@ -257,7 +257,7 @@ php artisan migrate:fresh
 php artisan migrate:fresh --seed
 ```
 
-By default, the `migrate:fresh` command only drops tables from the default database connection. However, you may use the `--database` option to specify the database connection that should be migrated. The database connection name should correspond to a connection defined in your application's `database` [configuration file](/docs/{{version}}/configuration):
+By default, the `migrate:fresh` command only drops tables from the default database connection. However, you may use the `--database` option to specify the database connection that should be migrated. The database connection name should correspond to a connection defined in your application's `database` [configuration file](/docs/{{version}}/getting-started/configuration):
 
 ```shell
 php artisan migrate:fresh --database=admin
@@ -886,7 +886,7 @@ $table->mediumText('data')->charset('binary'); // MEDIUMBLOB
 
 The `morphs` method is a convenience method that adds a `{column}_id` equivalent column and a `{column}_type` `VARCHAR` equivalent column. The column type for the `{column}_id` will be `UNSIGNED BIGINT`, `CHAR(36)`, or `CHAR(26)` depending on the model key type.
 
-This method is intended to be used when defining the columns necessary for a polymorphic [Eloquent relationship](/docs/{{version}}/eloquent-relationships). In the following example, `taggable_id` and `taggable_type` columns would be created:
+This method is intended to be used when defining the columns necessary for a polymorphic [Eloquent relationship](/docs/{{version}}/eloquent/eloquent-relationships). In the following example, `taggable_id` and `taggable_type` columns would be created:
 
 ```php
 $table->morphs('taggable');
@@ -922,7 +922,7 @@ $table->nullableUuidMorphs('taggable');
 <a name="column-method-rememberToken"></a>
 #### `rememberToken()` {.collection-method}
 
-The `rememberToken` method creates a nullable, `VARCHAR(100)` equivalent column that is intended to store the current "remember me" [authentication token](/docs/{{version}}/authentication#remembering-users):
+The `rememberToken` method creates a nullable, `VARCHAR(100)` equivalent column that is intended to store the current "remember me" [authentication token](/docs/{{version}}/security/authentication#remembering-users):
 
 ```php
 $table->rememberToken();
@@ -1134,7 +1134,7 @@ $table->unsignedTinyInteger('votes');
 
 The `ulidMorphs` method is a convenience method that adds a `{column}_id` `CHAR(26)` equivalent column and a `{column}_type` `VARCHAR` equivalent column.
 
-This method is intended to be used when defining the columns necessary for a polymorphic [Eloquent relationship](/docs/{{version}}/eloquent-relationships) that use ULID identifiers. In the following example, `taggable_id` and `taggable_type` columns would be created:
+This method is intended to be used when defining the columns necessary for a polymorphic [Eloquent relationship](/docs/{{version}}/eloquent/eloquent-relationships) that use ULID identifiers. In the following example, `taggable_id` and `taggable_type` columns would be created:
 
 ```php
 $table->ulidMorphs('taggable');
@@ -1145,7 +1145,7 @@ $table->ulidMorphs('taggable');
 
 The `uuidMorphs` method is a convenience method that adds a `{column}_id` `CHAR(36)` equivalent column and a `{column}_type` `VARCHAR` equivalent column.
 
-This method is intended to be used when defining the columns necessary for a polymorphic [Eloquent relationship](/docs/{{version}}/eloquent-relationships) that use UUID identifiers. In the following example, `taggable_id` and `taggable_type` columns would be created:
+This method is intended to be used when defining the columns necessary for a polymorphic [Eloquent relationship](/docs/{{version}}/eloquent/eloquent-relationships) that use UUID identifiers. In the following example, `taggable_id` and `taggable_type` columns would be created:
 
 ```php
 $table->uuidMorphs('taggable');
@@ -1536,12 +1536,12 @@ Schema::withoutForeignKeyConstraints(function () {
 ```
 
 > [!WARNING]
-> SQLite disables foreign key constraints by default. When using SQLite, make sure to [enable foreign key support](/docs/{{version}}/database#configuration) in your database configuration before attempting to create them in your migrations.
+> SQLite disables foreign key constraints by default. When using SQLite, make sure to [enable foreign key support](/docs/{{version}}/database/database#configuration) in your database configuration before attempting to create them in your migrations.
 
 <a name="events"></a>
 ## Events
 
-For convenience, each migration operation will dispatch an [event](/docs/{{version}}/events). All of the following events extend the base `Illuminate\Database\Events\MigrationEvent` class:
+For convenience, each migration operation will dispatch an [event](/docs/{{version}}/digging-deeper/events). All of the following events extend the base `Illuminate\Database\Events\MigrationEvent` class:
 
 <div class="overflow-auto">
 

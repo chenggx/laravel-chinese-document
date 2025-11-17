@@ -38,7 +38,7 @@ $collection = collect([1, 2, 3]);
 You may also create a collection using the [make](#method-make) and [fromJson](#method-fromjson) methods.
 
 > [!NOTE]
-> The results of [Eloquent](/docs/{{version}}/eloquent) queries are always returned as `Collection` instances.
+> The results of [Eloquent](/docs/{{version}}/eloquent/eloquent) queries are always returned as `Collection` instances.
 
 <a name="extending-collections"></a>
 ### Extending Collections
@@ -62,7 +62,7 @@ $upper = $collection->toUpper();
 // ['FIRST', 'SECOND']
 ```
 
-Typically, you should declare collection macros in the `boot` method of a [service provider](/docs/{{version}}/providers).
+Typically, you should declare collection macros in the `boot` method of a [service provider](/docs/{{version}}/architecture-concepts/providers).
 
 <a name="macro-arguments"></a>
 #### Macro Arguments
@@ -387,7 +387,7 @@ $chunks->all();
 // [[1, 2, 3, 4], [5, 6, 7]]
 ```
 
-This method is especially useful in [views](/docs/{{version}}/views) when working with a grid system such as [Bootstrap](https://getbootstrap.com/docs/5.3/layout/grid/). For example, imagine you have a collection of [Eloquent](/docs/{{version}}/eloquent) models you want to display in a grid:
+This method is especially useful in [views](/docs/{{version}}/basics/views) when working with a grid system such as [Bootstrap](https://getbootstrap.com/docs/5.3/layout/grid/). For example, imagine you have a collection of [Eloquent](/docs/{{version}}/eloquent/eloquent) models you want to display in a grid:
 
 ```blade
 @foreach ($products->chunk(3) as $chunk)
@@ -603,7 +603,7 @@ collect([1, 2, 3])->containsOneItem(fn (int $item) => $item === 2);
 This method has the same signature as the [contains](#method-contains) method; however, all values are compared using "strict" comparisons.
 
 > [!NOTE]
-> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-contains).
+> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent/eloquent-collections#method-contains).
 
 <a name="method-count"></a>
 #### `count()` {.collection-method}
@@ -724,7 +724,7 @@ $diff->all();
 ```
 
 > [!NOTE]
-> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-diff).
+> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent/eloquent-collections#method-diff).
 
 <a name="method-diffassoc"></a>
 #### `diffAssoc()` {.collection-method}
@@ -1024,7 +1024,7 @@ $filtered->all();
 For the inverse of `except`, see the [only](#method-only) method.
 
 > [!NOTE]
-> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-except).
+> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent/eloquent-collections#method-except).
 
 <a name="method-filter"></a>
 #### `filter()` {.collection-method}
@@ -1485,7 +1485,7 @@ $intersect->all();
 ```
 
 > [!NOTE]
-> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-intersect).
+> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent/eloquent-collections#method-intersect).
 
 <a name="method-intersectusing"></a>
 #### `intersectUsing()` {.collection-method}
@@ -2056,7 +2056,7 @@ $filtered->all();
 For the inverse of `only`, see the [except](#method-except) method.
 
 > [!NOTE]
-> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-only).
+> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent/eloquent-collections#method-only).
 
 <a name="method-pad"></a>
 #### `pad()` {.collection-method}
@@ -2103,7 +2103,7 @@ $equalOrAboveThree->all();
 ```
 
 > [!NOTE]
-> This method's behavior is modified when interacting with [Eloquent collections](/docs/{{version}}/eloquent-collections#method-partition).
+> This method's behavior is modified when interacting with [Eloquent collections](/docs/{{version}}/eloquent/eloquent-collections#method-partition).
 
 <a name="method-percentage"></a>
 #### `percentage()` {.collection-method}
@@ -3304,7 +3304,7 @@ $collection->all();
 <a name="method-toarray"></a>
 #### `toArray()` {.collection-method}
 
-The `toArray` method converts the collection into a plain PHP `array`. If the collection's values are [Eloquent](/docs/{{version}}/eloquent) models, the models will also be converted to arrays:
+The `toArray` method converts the collection into a plain PHP `array`. If the collection's values are [Eloquent](/docs/{{version}}/eloquent/eloquent) models, the models will also be converted to arrays:
 
 ```php
 $collection = collect(['name' => 'Desk', 'price' => 200]);
@@ -3477,7 +3477,7 @@ $unique->values()->all();
 The `unique` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [uniqueStrict](#method-uniquestrict) method to filter using "strict" comparisons.
 
 > [!NOTE]
-> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-unique).
+> This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent/eloquent-collections#method-unique).
 
 <a name="method-uniquestrict"></a>
 #### `uniqueStrict()` {.collection-method}
@@ -4269,7 +4269,7 @@ $lazyCollection->each(function (int $number) {
 // 59
 ```
 
-To illustrate the usage of this method, imagine an application that submits invoices from the database using a cursor. You could define a [scheduled task](/docs/{{version}}/scheduling) that runs every 15 minutes and only processes invoices for a maximum of 14 minutes:
+To illustrate the usage of this method, imagine an application that submits invoices from the database using a cursor. You could define a [scheduled task](/docs/{{version}}/digging-deeper/scheduling) that runs every 15 minutes and only processes invoices for a maximum of 14 minutes:
 
 ```php
 use App\Models\Invoice;

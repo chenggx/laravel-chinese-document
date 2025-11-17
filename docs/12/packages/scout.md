@@ -33,7 +33,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-[Laravel Scout](https://github.com/laravel/scout) provides a simple, driver-based solution for adding full-text search to your [Eloquent models](/docs/{{version}}/eloquent). Using model observers, Scout will automatically keep your search indexes in sync with your Eloquent records.
+[Laravel Scout](https://github.com/laravel/scout) provides a simple, driver-based solution for adding full-text search to your [Eloquent models](/docs/{{version}}/eloquent/eloquent). Using model observers, Scout will automatically keep your search indexes in sync with your Eloquent records.
 
 Currently, Scout ships with [Algolia](https://www.algolia.com/), [Meilisearch](https://www.meilisearch.com), [Typesense](https://typesense.org), and MySQL / PostgreSQL (`database`) drivers. In addition, Scout includes a "collection" driver that is designed for local development usage and does not require any external dependencies or third-party services. Furthermore, writing custom drivers is simple and you are free to extend Scout with your own search implementations.
 
@@ -71,7 +71,7 @@ class Post extends Model
 <a name="queueing"></a>
 ### Queueing
 
-When using an engine that is not the `database` or `collection` engine, you should strongly consider configuring a [queue driver](/docs/{{version}}/queues) before using the library. Running a queue worker will allow Scout to queue all operations that sync your model information to your search indexes, providing much better response times for your application's web interface.
+When using an engine that is not the `database` or `collection` engine, you should strongly consider configuring a [queue driver](/docs/{{version}}/digging-deeper/queues) before using the library. Running a queue worker will allow Scout to queue all operations that sync your model information to your search indexes, providing much better response times for your application's web interface.
 
 Once you have configured a queue driver, set the value of the `queue` option in your `config/scout.php` configuration file to `true`:
 
@@ -111,7 +111,7 @@ composer require algolia/algoliasearch-client-php
 <a name="meilisearch"></a>
 ### Meilisearch
 
-[Meilisearch](https://www.meilisearch.com) is a blazingly fast and open source search engine. If you aren't sure how to install Meilisearch on your local machine, you may use [Laravel Sail](/docs/{{version}}/sail#meilisearch), Laravel's officially supported Docker development environment.
+[Meilisearch](https://www.meilisearch.com) is a blazingly fast and open source search engine. If you aren't sure how to install Meilisearch on your local machine, you may use [Laravel Sail](/docs/{{version}}/packages/sail#meilisearch), Laravel's officially supported Docker development environment.
 
 When using the Meilisearch driver you will need to install the Meilisearch PHP SDK via the Composer package manager:
 
@@ -155,7 +155,7 @@ TYPESENSE_API_KEY=masterKey
 TYPESENSE_HOST=localhost
 ```
 
-If you are using [Laravel Sail](/docs/{{version}}/sail), you may need to adjust the `TYPESENSE_HOST` environment variable to match the Docker container name. You may also optionally specify your installation's port, path, and protocol:
+If you are using [Laravel Sail](/docs/{{version}}/packages/sail), you may need to adjust the `TYPESENSE_HOST` environment variable to match the Docker container name. You may also optionally specify your installation's port, path, and protocol:
 
 ```ini
 TYPESENSE_PORT=8108
@@ -503,7 +503,7 @@ public function toSearchableArray(): array
 ```
 
 > [!WARNING]
-> Before specifying that a column should use full text query constraints, ensure that the column has been assigned a [full text index](/docs/{{version}}/migrations#available-index-types).
+> Before specifying that a column should use full text query constraints, ensure that the column has been assigned a [full text index](/docs/{{version}}/database/migrations#available-index-types).
 
 <a name="collection-engine"></a>
 ### Collection Engine
@@ -536,7 +536,7 @@ If you are installing Scout into an existing project, you may already have datab
 php artisan scout:import "App\Models\Post"
 ```
 
-The `scout:queue-import` command may be used to import all of your existing records using [queued jobs](/docs/{{version}}/queues):
+The `scout:queue-import` command may be used to import all of your existing records using [queued jobs](/docs/{{version}}/digging-deeper/queues):
 
 ```shell
 php artisan scout:queue-import "App\Models\Post" --chunk=500
@@ -566,7 +566,7 @@ protected function makeAllSearchableUsing(Builder $query): Builder
 ```
 
 > [!WARNING]
-> The `makeAllSearchableUsing` method may not be applicable when using a queue to batch import models. Relationships are [not restored](/docs/{{version}}/queues#handling-relationships) when model collections are processed by jobs.
+> The `makeAllSearchableUsing` method may not be applicable when using a queue to batch import models. Relationships are [not restored](/docs/{{version}}/digging-deeper/queues#handling-relationships) when model collections are processed by jobs.
 
 <a name="adding-records"></a>
 ### Adding Records
@@ -586,7 +586,7 @@ $order->save();
 <a name="adding-records-via-query"></a>
 #### Adding Records via Query
 
-If you would like to add a collection of models to your search index via an Eloquent query, you may chain the `searchable` method onto the Eloquent query. The `searchable` method will [chunk the results](/docs/{{version}}/eloquent#chunking-results) of the query and add the records to your search index. Again, if you have configured Scout to use queues, all of the chunks will be imported in the background by your queue workers:
+If you would like to add a collection of models to your search index via an Eloquent query, you may chain the `searchable` method onto the Eloquent query. The `searchable` method will [chunk the results](/docs/{{version}}/eloquent/eloquent#chunking-results) of the query and add the records to your search index. Again, if you have configured Scout to use queues, all of the chunks will be imported in the background by your queue workers:
 
 ```php
 use App\Models\Order;
@@ -662,7 +662,7 @@ public function makeSearchableUsing(Collection $models): Collection
 <a name="removing-records"></a>
 ### Removing Records
 
-To remove a record from your index you may simply `delete` the model from the database. This may be done even if you are using [soft deleted](/docs/{{version}}/eloquent#soft-deleting) models:
+To remove a record from your index you may simply `delete` the model from the database. This may be done even if you are using [soft deleted](/docs/{{version}}/eloquent/eloquent#soft-deleting) models:
 
 ```php
 use App\Models\Order;
@@ -803,7 +803,7 @@ Since a search index is not a relational database, more advanced "where" clauses
 <a name="pagination"></a>
 ### Pagination
 
-In addition to retrieving a collection of models, you may paginate your search results using the `paginate` method. This method will return an `Illuminate\Pagination\LengthAwarePaginator` instance just as if you had [paginated a traditional Eloquent query](/docs/{{version}}/pagination):
+In addition to retrieving a collection of models, you may paginate your search results using the `paginate` method. This method will return an `Illuminate\Pagination\LengthAwarePaginator` instance just as if you had [paginated a traditional Eloquent query](/docs/{{version}}/database/pagination):
 
 ```php
 use App\Models\Order;
@@ -817,7 +817,7 @@ You may specify how many models to retrieve per page by passing the amount as th
 $orders = Order::search('Star Trek')->paginate(15);
 ```
 
-Once you have retrieved the results, you may display the results and render the page links using [Blade](/docs/{{version}}/blade) just as if you had paginated a traditional Eloquent query:
+Once you have retrieved the results, you may display the results and render the page links using [Blade](/docs/{{version}}/basics/blade) just as if you had paginated a traditional Eloquent query:
 
 ```html
 <div class="container">
@@ -846,7 +846,7 @@ Route::get('/orders', function (Request $request) {
 <a name="soft-deleting"></a>
 ### Soft Deleting
 
-If your indexed models are [soft deleting](/docs/{{version}}/eloquent#soft-deleting) and you need to search your soft deleted models, set the `soft_delete` option of the `config/scout.php` configuration file to `true`:
+If your indexed models are [soft deleting](/docs/{{version}}/eloquent/eloquent#soft-deleting) and you need to search your soft deleted models, set the `soft_delete` option of the `config/scout.php` configuration file to `true`:
 
 ```php
 'soft_delete' => true,

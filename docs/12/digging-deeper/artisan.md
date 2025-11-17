@@ -42,7 +42,7 @@ php artisan help migrate
 <a name="laravel-sail"></a>
 #### Laravel Sail
 
-If you are using [Laravel Sail](/docs/{{version}}/sail) as your local development environment, remember to use the `sail` command line to invoke Artisan commands. Sail will execute your Artisan commands within your application's Docker containers:
+If you are using [Laravel Sail](/docs/{{version}}/packages/sail) as your local development environment, remember to use the `sail` command line to invoke Artisan commands. Sail will execute your Artisan commands within your application's Docker containers:
 
 ```shell
 ./vendor/bin/sail artisan list
@@ -124,7 +124,7 @@ php artisan make:command SendEmails
 
 After generating your command, you should define appropriate values for the `signature` and `description` properties of the class. These properties will be used when displaying your command on the `list` screen. The `signature` property also allows you to define [your command's input expectations](#defining-input-expectations). The `handle` method will be called when your command is executed. You may place your command logic in this method.
 
-Let's take a look at an example command. Note that we are able to request any dependencies we need via the command's `handle` method. The Laravel [service container](/docs/{{version}}/container) will automatically inject all dependencies that are type-hinted in this method's signature:
+Let's take a look at an example command. Note that we are able to request any dependencies we need via the command's `handle` method. The Laravel [service container](/docs/{{version}}/architecture-concepts/container) will automatically inject all dependencies that are type-hinted in this method's signature:
 
 ```php
 <?php
@@ -199,7 +199,7 @@ The closure is bound to the underlying command instance, so you have full access
 <a name="type-hinting-dependencies"></a>
 #### Type-Hinting Dependencies
 
-In addition to receiving your command's arguments and options, command closures may also type-hint additional dependencies that you would like resolved out of the [service container](/docs/{{version}}/container):
+In addition to receiving your command's arguments and options, command closures may also type-hint additional dependencies that you would like resolved out of the [service container](/docs/{{version}}/architecture-concepts/container):
 
 ```php
 use App\Models\User;
@@ -501,7 +501,7 @@ return [
 ```
 
 > [!NOTE]
-The comprehensive [Laravel Prompts](/docs/{{version}}/prompts) documentation includes additional information on the available prompts and their usage.
+The comprehensive [Laravel Prompts](/docs/{{version}}/packages/prompts) documentation includes additional information on the available prompts and their usage.
 
 If you wish to prompt the user to select or enter [options](#options), you may include prompts in your command's `handle` method. However, if you only wish to prompt the user when they have also been automatically prompted for missing arguments, then you may implement the `afterPromptingForMissingArguments` method:
 
@@ -562,7 +562,7 @@ $options = $this->options();
 ### Prompting for Input
 
 > [!NOTE]
-> [Laravel Prompts](/docs/{{version}}/prompts) is a PHP package for adding beautiful and user-friendly forms to your command-line applications, with browser-like features including placeholder text and validation.
+> [Laravel Prompts](/docs/{{version}}/packages/prompts) is a PHP package for adding beautiful and user-friendly forms to your command-line applications, with browser-like features including placeholder text and validation.
 
 In addition to displaying output, you may also ask the user to provide input during the execution of your command. The `ask` method will prompt the user with the given question, accept their input, and then return the user's input back to your command:
 
@@ -764,7 +764,7 @@ use App\Domain\Orders\Commands\SendEmails;
 ])
 ```
 
-When Artisan boots, all the commands in your application will be resolved by the [service container](/docs/{{version}}/container) and registered with Artisan.
+When Artisan boots, all the commands in your application will be resolved by the [service container](/docs/{{version}}/architecture-concepts/container) and registered with Artisan.
 
 <a name="programmatically-executing-commands"></a>
 ## Programmatically Executing Commands
@@ -820,7 +820,7 @@ $exitCode = Artisan::call('migrate:refresh', [
 <a name="queueing-artisan-commands"></a>
 #### Queueing Artisan Commands
 
-Using the `queue` method on the `Artisan` facade, you may even queue Artisan commands so they are processed in the background by your [queue workers](/docs/{{version}}/queues). Before using this method, make sure you have configured your queue and are running a queue listener:
+Using the `queue` method on the `Artisan` facade, you may even queue Artisan commands so they are processed in the background by your [queue workers](/docs/{{version}}/digging-deeper/queues). Before using this method, make sure you have configured your queue and are running a queue listener:
 
 ```php
 use Illuminate\Support\Facades\Artisan;

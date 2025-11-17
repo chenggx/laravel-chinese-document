@@ -89,7 +89,7 @@ foreach ($users as $user) {
 ```
 
 > [!NOTE]
-> Laravel collections provide a variety of extremely powerful methods for mapping and reducing data. For more information on Laravel collections, check out the [collection documentation](/docs/{{version}}/collections).
+> Laravel collections provide a variety of extremely powerful methods for mapping and reducing data. For more information on Laravel collections, check out the [collection documentation](/docs/{{version}}/digging-deeper/collections).
 
 <a name="retrieving-a-single-row-column-from-a-table"></a>
 #### Retrieving a Single Row / Column From a Table
@@ -204,7 +204,7 @@ DB::table('users')->where(function ($query) {
 <a name="streaming-results-lazily"></a>
 ### Streaming Results Lazily
 
-The `lazy` method works similarly to [the chunk method](#chunking-results) in the sense that it executes the query in chunks. However, instead of passing each chunk into a callback, the `lazy()` method returns a [LazyCollection](/docs/{{version}}/collections#lazy-collections), which lets you interact with the results as a single stream:
+The `lazy` method works similarly to [the chunk method](#chunking-results) in the sense that it executes the query in chunks. However, instead of passing each chunk into a callback, the `lazy()` method returns a [LazyCollection](/docs/{{version}}/digging-deeper/collections#lazy-collections), which lets you interact with the results as a single stream:
 
 ```php
 use Illuminate\Support\Facades\DB;
@@ -1139,7 +1139,7 @@ $incomes = Income::where('amount', '<', function (Builder $query) {
 > [!WARNING]
 > Full text where clauses are currently supported by MariaDB, MySQL, and PostgreSQL.
 
-The `whereFullText` and `orWhereFullText` methods may be used to add full text "where" clauses to a query for columns that have [full text indexes](/docs/{{version}}/migrations#available-index-types). These methods will be transformed into the appropriate SQL for the underlying database system by Laravel. For example, a `MATCH AGAINST` clause will be generated for applications utilizing MariaDB or MySQL:
+The `whereFullText` and `orWhereFullText` methods may be used to add full text "where" clauses to a query for columns that have [full text indexes](/docs/{{version}}/database/migrations#available-index-types). These methods will be transformed into the appropriate SQL for the underlying database system by Laravel. For example, a `MATCH AGAINST` clause will be generated for applications utilizing MariaDB or MySQL:
 
 ```php
 $users = DB::table('users')
@@ -1508,7 +1508,7 @@ DB::table('users')
     ->get();
 ```
 
-While not obligatory, it is recommended to wrap pessimistic locks within a [transaction](/docs/{{version}}/database#database-transactions). This ensures that the data retrieved remains unaltered in the database until the entire operation completes. In case of a failure, the transaction will roll back any changes and release the locks automatically:
+While not obligatory, it is recommended to wrap pessimistic locks within a [transaction](/docs/{{version}}/database/database#database-transactions). This ensures that the data retrieved remains unaltered in the database until the entire operation completes. In case of a failure, the transaction will roll back any changes and release the locks automatically:
 
 ```php
 DB::transaction(function () {
@@ -1627,7 +1627,7 @@ DB::table('flights')
 
 The `tap` method will always return the query builder. If you would like to extract an object that executes the query and returns another value, you may use the `pipe` method instead.
 
-Consider the following query object that contains shared [pagination](/docs/{{version}}/pagination) logic used throughout an application. Unlike the `DestinationFilter`, which applies query conditions to the query, the `Paginate` object executes the query and returns a paginator instance:
+Consider the following query object that contains shared [pagination](/docs/{{version}}/database/pagination) logic used throughout an application. Unlike the `DestinationFilter`, which applies query conditions to the query, the `Paginate` object executes the query and returns a paginator instance:
 
 ```php
 <?php

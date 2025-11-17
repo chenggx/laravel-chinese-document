@@ -215,7 +215,7 @@ class ExampleTest extends TestCase
 }
 ```
 
-Laravel's session is typically used to maintain state for the currently authenticated user. Therefore, the `actingAs` helper method provides a simple way to authenticate a given user as the current user. For example, we may use a [model factory](/docs/{{version}}/eloquent-factories) to generate and authenticate a user:
+Laravel's session is typically used to maintain state for the currently authenticated user. Therefore, the `actingAs` helper method provides a simple way to authenticate a given user as the current user. For example, we may use a [model factory](/docs/{{version}}/eloquent/eloquent-factories) to generate and authenticate a user:
 
 ```php tab=Pest
 <?php
@@ -907,7 +907,7 @@ $contents = (string) $this->view('welcome');
 <a name="sharing-errors"></a>
 #### Sharing Errors
 
-Some views may depend on errors shared in the [global error bag provided by Laravel](/docs/{{version}}/validation#quick-displaying-the-validation-errors). To hydrate the error bag with error messages, you may use the `withViewErrors` method:
+Some views may depend on errors shared in the [global error bag provided by Laravel](/docs/{{version}}/basics/validation#quick-displaying-the-validation-errors). To hydrate the error bag with error messages, you may use the `withViewErrors` method:
 
 ```php
 $view = $this->withViewErrors([
@@ -920,7 +920,7 @@ $view->assertSee('Please provide a valid name.');
 <a name="rendering-blade-and-components"></a>
 ### Rendering Blade and Components
 
-If necessary, you may use the `blade` method to evaluate and render a raw [Blade](/docs/{{version}}/blade) string. Like the `view` method, the `blade` method returns an instance of `Illuminate\Testing\TestView`:
+If necessary, you may use the `blade` method to evaluate and render a raw [Blade](/docs/{{version}}/basics/blade) string. Like the `view` method, the `blade` method returns an instance of `Illuminate\Testing\TestView`:
 
 ```php
 $view = $this->blade(
@@ -931,7 +931,7 @@ $view = $this->blade(
 $view->assertSee('Taylor');
 ```
 
-You may use the `component` method to evaluate and render a [Blade component](/docs/{{version}}/blade#components). The `component` method returns an instance of `Illuminate\Testing\TestComponent`:
+You may use the `component` method to evaluate and render a [Blade component](/docs/{{version}}/basics/blade#components). The `component` method returns an instance of `Illuminate\Testing\TestComponent`:
 
 ```php
 $view = $this->component(Profile::class, ['name' => 'Taylor']);
@@ -1643,7 +1643,7 @@ $response->assertRedirectContains($string);
 <a name="assert-redirect-to-route"></a>
 #### assertRedirectToRoute
 
-Assert that the response is a redirect to the given [named route](/docs/{{version}}/routing#named-routes):
+Assert that the response is a redirect to the given [named route](/docs/{{version}}/basics/routing#named-routes):
 
 ```php
 $response->assertRedirectToRoute($name, $parameters = []);
@@ -1652,7 +1652,7 @@ $response->assertRedirectToRoute($name, $parameters = []);
 <a name="assert-redirect-to-signed-route"></a>
 #### assertRedirectToSignedRoute
 
-Assert that the response is a redirect to the given [signed route](/docs/{{version}}/urls#signed-urls):
+Assert that the response is a redirect to the given [signed route](/docs/{{version}}/basics/urls#signed-urls):
 
 ```php
 $response->assertRedirectToSignedRoute($name = null, $parameters = []);
@@ -1741,7 +1741,7 @@ $response->assertSessionHas($key, function (User $value) {
 <a name="assert-session-has-input"></a>
 #### assertSessionHasInput
 
-Assert that the session has a given value in the [flashed input array](/docs/{{version}}/responses#redirecting-with-flashed-session-data):
+Assert that the session has a given value in the [flashed input array](/docs/{{version}}/basics/responses#redirecting-with-flashed-session-data):
 
 ```php
 $response->assertSessionHasInput($key, $value = null);
@@ -1806,7 +1806,7 @@ $response->assertSessionHasErrors([
 <a name="assert-session-has-errors-in"></a>
 #### assertSessionHasErrorsIn
 
-Assert that the session contains an error for the given `$keys` within a specific [error bag](/docs/{{version}}/validation#named-error-bags). If `$keys` is an associative array, assert that the session contains a specific error message (value) for each field (key), within the error bag:
+Assert that the session contains an error for the given `$keys` within a specific [error bag](/docs/{{version}}/basics/validation#named-error-bags). If `$keys` is an associative array, assert that the session contains a specific error message (value) for each field (key), within the error bag:
 
 ```php
 $response->assertSessionHasErrorsIn($errorBag, $keys = [], $format = null);

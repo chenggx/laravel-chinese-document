@@ -14,7 +14,7 @@
 When building APIs using Laravel, you will often need to convert your models and relationships to arrays or JSON. Eloquent includes convenient methods for making these conversions, as well as controlling which attributes are included in the serialized representation of your models.
 
 > [!NOTE]
-> For an even more robust way of handling Eloquent model and collection JSON serialization, check out the documentation on [Eloquent API resources](/docs/{{version}}/eloquent-resources).
+> For an even more robust way of handling Eloquent model and collection JSON serialization, check out the documentation on [Eloquent API resources](/docs/{{version}}/eloquent/eloquent-resources).
 
 <a name="serializing-models-and-collections"></a>
 ## Serializing Models and Collections
@@ -22,7 +22,7 @@ When building APIs using Laravel, you will often need to convert your models and
 <a name="serializing-to-arrays"></a>
 ### Serializing to Arrays
 
-To convert a model and its loaded [relationships](/docs/{{version}}/eloquent-relationships) to an array, you should use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
+To convert a model and its loaded [relationships](/docs/{{version}}/eloquent/eloquent-relationships) to an array, you should use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
 
 ```php
 use App\Models\User;
@@ -40,7 +40,7 @@ $user = User::first();
 return $user->attributesToArray();
 ```
 
-You may also convert entire [collections](/docs/{{version}}/eloquent-collections) of models to arrays by calling the `toArray` method on the collection instance:
+You may also convert entire [collections](/docs/{{version}}/eloquent/eloquent-collections) of models to arrays by calling the `toArray` method on the collection instance:
 
 ```php
 $users = User::all();
@@ -158,7 +158,7 @@ return $user->setHidden(['email', 'password', 'remember_token'])->toArray();
 <a name="appending-values-to-json"></a>
 ## Appending Values to JSON
 
-Occasionally, when converting models to arrays or JSON, you may wish to add attributes that do not have a corresponding column in your database. To do so, first define an [accessor](/docs/{{version}}/eloquent-mutators) for the value:
+Occasionally, when converting models to arrays or JSON, you may wish to add attributes that do not have a corresponding column in your database. To do so, first define an [accessor](/docs/{{version}}/eloquent/eloquent-mutators) for the value:
 
 ```php
 <?php
@@ -238,7 +238,7 @@ protected function serializeDate(DateTimeInterface $date): string
 <a name="customizing-the-date-format-per-attribute"></a>
 #### Customizing the Date Format per Attribute
 
-You may customize the serialization format of individual Eloquent date attributes by specifying the date format in the model's [cast declarations](/docs/{{version}}/eloquent-mutators#attribute-casting):
+You may customize the serialization format of individual Eloquent date attributes by specifying the date format in the model's [cast declarations](/docs/{{version}}/eloquent/eloquent-mutators#attribute-casting):
 
 ```php
 protected function casts(): array

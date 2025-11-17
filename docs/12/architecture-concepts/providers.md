@@ -19,12 +19,12 @@ Laravel uses dozens of service providers internally to bootstrap its core servic
 All user-defined service providers are registered in the `bootstrap/providers.php` file. In the following documentation, you will learn how to write your own service providers and register them with your Laravel application.
 
 > [!NOTE]
-> If you would like to learn more about how Laravel handles requests and works internally, check out our documentation on the Laravel [request lifecycle](/docs/{{version}}/lifecycle).
+> If you would like to learn more about how Laravel handles requests and works internally, check out our documentation on the Laravel [request lifecycle](/docs/{{version}}/architecture-concepts/lifecycle).
 
 <a name="writing-service-providers"></a>
 ## Writing Service Providers
 
-All service providers extend the `Illuminate\Support\ServiceProvider` class. Most service providers contain a `register` and a `boot` method. Within the `register` method, you should **only bind things into the [service container](/docs/{{version}}/container)**. You should never attempt to register any event listeners, routes, or any other piece of functionality within the `register` method.
+All service providers extend the `Illuminate\Support\ServiceProvider` class. Most service providers contain a `register` and a `boot` method. Within the `register` method, you should **only bind things into the [service container](/docs/{{version}}/architecture-concepts/container)**. You should never attempt to register any event listeners, routes, or any other piece of functionality within the `register` method.
 
 The Artisan CLI can generate a new provider via the `make:provider` command. Laravel will automatically register your new provider in your application's `bootstrap/providers.php` file:
 
@@ -35,7 +35,7 @@ php artisan make:provider RiakServiceProvider
 <a name="the-register-method"></a>
 ### The Register Method
 
-As mentioned previously, within the `register` method, you should only bind things into the [service container](/docs/{{version}}/container). You should never attempt to register any event listeners, routes, or any other piece of functionality within the `register` method. Otherwise, you may accidentally use a service that is provided by a service provider which has not loaded yet.
+As mentioned previously, within the `register` method, you should only bind things into the [service container](/docs/{{version}}/architecture-concepts/container). You should never attempt to register any event listeners, routes, or any other piece of functionality within the `register` method. Otherwise, you may accidentally use a service that is provided by a service provider which has not loaded yet.
 
 Let's take a look at a basic service provider. Within any of your service provider methods, you always have access to the `$app` property which provides access to the service container:
 
@@ -62,7 +62,7 @@ class RiakServiceProvider extends ServiceProvider
 }
 ```
 
-This service provider only defines a `register` method, and uses that method to define an implementation of `App\Services\Riak\Connection` in the service container. If you're not yet familiar with Laravel's service container, check out [its documentation](/docs/{{version}}/container).
+This service provider only defines a `register` method, and uses that method to define an implementation of `App\Services\Riak\Connection` in the service container. If you're not yet familiar with Laravel's service container, check out [its documentation](/docs/{{version}}/architecture-concepts/container).
 
 <a name="the-bindings-and-singletons-properties"></a>
 #### The `bindings` and `singletons` Properties
@@ -107,7 +107,7 @@ class AppServiceProvider extends ServiceProvider
 <a name="the-boot-method"></a>
 ### The Boot Method
 
-So, what if we need to register a [view composer](/docs/{{version}}/views#view-composers) within our service provider? This should be done within the `boot` method. **This method is called after all other service providers have been registered**, meaning you have access to all other services that have been registered by the framework:
+So, what if we need to register a [view composer](/docs/{{version}}/basics/views#view-composers) within our service provider? This should be done within the `boot` method. **This method is called after all other service providers have been registered**, meaning you have access to all other services that have been registered by the framework:
 
 ```php
 <?php
@@ -134,7 +134,7 @@ class ComposerServiceProvider extends ServiceProvider
 <a name="boot-method-dependency-injection"></a>
 #### Boot Method Dependency Injection
 
-You may type-hint dependencies for your service provider's `boot` method. The [service container](/docs/{{version}}/container) will automatically inject any dependencies you need:
+You may type-hint dependencies for your service provider's `boot` method. The [service container](/docs/{{version}}/architecture-concepts/container) will automatically inject any dependencies you need:
 
 ```php
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -177,7 +177,7 @@ return [
 <a name="deferred-providers"></a>
 ## Deferred Providers
 
-If your provider is **only** registering bindings in the [service container](/docs/{{version}}/container), you may choose to defer its registration until one of the registered bindings is actually needed. Deferring the loading of such a provider will improve the performance of your application, since it is not loaded from the filesystem on every request.
+If your provider is **only** registering bindings in the [service container](/docs/{{version}}/architecture-concepts/container), you may choose to defer its registration until one of the registered bindings is actually needed. Deferring the loading of such a provider will improve the performance of your application, since it is not loaded from the filesystem on every request.
 
 Laravel compiles and stores a list of all of the services supplied by deferred service providers, along with the name of its service provider class. Then, only when you attempt to resolve one of these services does Laravel load the service provider.
 

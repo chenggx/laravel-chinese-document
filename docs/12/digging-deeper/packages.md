@@ -34,7 +34,7 @@ When writing a Laravel application, it generally does not matter if you use cont
 <a name="package-discovery"></a>
 ## Package Discovery
 
-A Laravel application's `bootstrap/providers.php` file contains the list of service providers that should be loaded by Laravel. However, instead of requiring users to manually add your service provider to the list, you may define the provider in the `extra` section of your package's `composer.json` file so that it is automatically loaded by Laravel. In addition to service providers, you may also list any [facades](/docs/{{version}}/facades) you would like to be registered:
+A Laravel application's `bootstrap/providers.php` file contains the list of service providers that should be loaded by Laravel. However, instead of requiring users to manually add your service provider to the list, you may define the provider in the `extra` section of your package's `composer.json` file so that it is automatically loaded by Laravel. In addition to service providers, you may also list any [facades](/docs/{{version}}/architecture-concepts/facades) you would like to be registered:
 
 ```json
 "extra": {
@@ -81,9 +81,9 @@ You may disable package discovery for all packages using the `*` character insid
 <a name="service-providers"></a>
 ## Service Providers
 
-[Service providers](/docs/{{version}}/providers) are the connection point between your package and Laravel. A service provider is responsible for binding things into Laravel's [service container](/docs/{{version}}/container) and informing Laravel where to load package resources such as views, configuration, and language files.
+[Service providers](/docs/{{version}}/architecture-concepts/providers) are the connection point between your package and Laravel. A service provider is responsible for binding things into Laravel's [service container](/docs/{{version}}/architecture-concepts/container) and informing Laravel where to load package resources such as views, configuration, and language files.
 
-A service provider extends the `Illuminate\Support\ServiceProvider` class and contains two methods: `register` and `boot`. The base `ServiceProvider` class is located in the `illuminate/support` Composer package, which you should add to your own package's dependencies. To learn more about the structure and purpose of service providers, check out [their documentation](/docs/{{version}}/providers).
+A service provider extends the `Illuminate\Support\ServiceProvider` class and contains two methods: `register` and `boot`. The base `ServiceProvider` class is located in the `illuminate/support` Composer package, which you should add to your own package's dependencies. To learn more about the structure and purpose of service providers, check out [their documentation](/docs/{{version}}/architecture-concepts/providers).
 
 <a name="resources"></a>
 ## Resources
@@ -154,7 +154,7 @@ public function boot(): void
 <a name="migrations"></a>
 ### Migrations
 
-If your package contains [database migrations](/docs/{{version}}/migrations), you may use the `publishesMigrations` method to inform Laravel that the given directory or file contains migrations. When Laravel publishes the migrations, it will automatically update the timestamp within their filename to reflect the current date and time:
+If your package contains [database migrations](/docs/{{version}}/database/migrations), you may use the `publishesMigrations` method to inform Laravel that the given directory or file contains migrations. When Laravel publishes the migrations, it will automatically update the timestamp within their filename to reflect the current date and time:
 
 ```php
 /**
@@ -171,7 +171,7 @@ public function boot(): void
 <a name="language-files"></a>
 ### Language Files
 
-If your package contains [language files](/docs/{{version}}/localization), you may use the `loadTranslationsFrom` method to inform Laravel how to load them. For example, if your package is named `courier`, you should add the following to your service provider's `boot` method:
+If your package contains [language files](/docs/{{version}}/digging-deeper/localization), you may use the `loadTranslationsFrom` method to inform Laravel how to load them. For example, if your package is named `courier`, you should add the following to your service provider's `boot` method:
 
 ```php
 /**
@@ -225,7 +225,7 @@ Now, when users of your package execute Laravel's `vendor:publish` Artisan comma
 <a name="views"></a>
 ### Views
 
-To register your package's [views](/docs/{{version}}/views) with Laravel, you need to tell Laravel where the views are located. You may do this using the service provider's `loadViewsFrom` method. The `loadViewsFrom` method accepts two arguments: the path to your view templates and your package's name. For example, if your package's name is `courier`, you would add the following to your service provider's `boot` method:
+To register your package's [views](/docs/{{version}}/basics/views) with Laravel, you need to tell Laravel where the views are located. You may do this using the service provider's `loadViewsFrom` method. The `loadViewsFrom` method accepts two arguments: the path to your view templates and your package's name. For example, if your package's name is `courier`, you would add the following to your service provider's `boot` method:
 
 ```php
 /**
@@ -350,7 +350,7 @@ public function boot(): void
 <a name="commands"></a>
 ## Commands
 
-To register your package's Artisan commands with Laravel, you may use the `commands` method. This method expects an array of command class names. Once the commands have been registered, you may execute them using the [Artisan CLI](/docs/{{version}}/artisan):
+To register your package's Artisan commands with Laravel, you may use the `commands` method. This method expects an array of command class names. Once the commands have been registered, you may execute them using the [Artisan CLI](/docs/{{version}}/digging-deeper/artisan):
 
 ```php
 use Courier\Console\Commands\InstallCommand;
@@ -373,7 +373,7 @@ public function boot(): void
 <a name="optimize-commands"></a>
 ### Optimize Commands
 
-Laravel's [optimize command](/docs/{{version}}/deployment#optimization) caches the application's configuration, events, routes, and views. Using the `optimizes` method, you may register your package's own Artisan commands that should be invoked when the `optimize` and `optimize:clear` commands are executed:
+Laravel's [optimize command](/docs/{{version}}/getting-started/deployment#optimization) caches the application's configuration, events, routes, and views. Using the `optimizes` method, you may register your package's own Artisan commands that should be invoked when the `optimize` and `optimize:clear` commands are executed:
 
 ```php
 /**

@@ -117,7 +117,7 @@ public function boot(): void
 ```
 
 > [!WARNING]
-> If you customize the pluralizer's language, you should explicitly define your Eloquent model's [table names](/docs/{{version}}/eloquent#table-names).
+> If you customize the pluralizer's language, you should explicitly define your Eloquent model's [table names](/docs/{{version}}/eloquent/eloquent#table-names).
 
 <a name="defining-translation-strings"></a>
 ## Defining Translation Strings
@@ -186,7 +186,7 @@ echo __('I love programming.');
 
 Again, if the translation string does not exist, the `__` function will return the translation string key that it was given.
 
-If you are using the [Blade templating engine](/docs/{{version}}/blade), you may use the `{{ }}` echo syntax to display the translation string:
+If you are using the [Blade templating engine](/docs/{{version}}/basics/blade), you may use the `{{ }}` echo syntax to display the translation string:
 
 ```blade
 {{ __('messages.welcome') }}

@@ -79,7 +79,7 @@ php artisan dusk:install
 Next, set the `APP_URL` environment variable in your application's `.env` file. This value should match the URL you use to access your application in a browser.
 
 > [!NOTE]
-> If you are using [Laravel Sail](/docs/{{version}}/sail) to manage your local development environment, please also consult the Sail documentation on [configuring and running Dusk tests](/docs/{{version}}/sail#laravel-dusk).
+> If you are using [Laravel Sail](/docs/{{version}}/packages/sail) to manage your local development environment, please also consult the Sail documentation on [configuring and running Dusk tests](/docs/{{version}}/packages/sail#laravel-dusk).
 
 <a name="managing-chromedriver-installations"></a>
 ### Managing ChromeDriver Installations
@@ -303,7 +303,7 @@ php artisan dusk --group=foo
 ```
 
 > [!NOTE]
-> If you are using [Laravel Sail](/docs/{{version}}/sail) to manage your local development environment, please consult the Sail documentation on [configuring and running Dusk tests](/docs/{{version}}/sail#laravel-dusk).
+> If you are using [Laravel Sail](/docs/{{version}}/packages/sail) to manage your local development environment, please consult the Sail documentation on [configuring and running Dusk tests](/docs/{{version}}/packages/sail#laravel-dusk).
 
 <a name="manually-starting-chromedriver"></a>
 #### Manually Starting ChromeDriver
@@ -444,7 +444,7 @@ The `visit` method may be used to navigate to a given URI within your applicatio
 $browser->visit('/login');
 ```
 
-You may use the `visitRoute` method to navigate to a [named route](/docs/{{version}}/routing#named-routes):
+You may use the `visitRoute` method to navigate to a [named route](/docs/{{version}}/basics/routing#named-routes):
 
 ```php
 $browser->visitRoute($routeName, $parameters);
@@ -500,7 +500,7 @@ $browser->move($x = 100, $y = 100);
 <a name="browser-macros"></a>
 ### Browser Macros
 
-If you would like to define a custom browser method that you can re-use in a variety of your tests, you may use the `macro` method on the `Browser` class. Typically, you should call this method from a [service provider's](/docs/{{version}}/providers) `boot` method:
+If you would like to define a custom browser method that you can re-use in a variety of your tests, you may use the `macro` method on the `Browser` class. Typically, you should call this method from a [service provider's](/docs/{{version}}/architecture-concepts/providers) `boot` method:
 
 ```php
 <?php
@@ -891,7 +891,7 @@ $browser->withKeyboard(function (Keyboard $keyboard) {
 <a name="keyboard-macros"></a>
 #### Keyboard Macros
 
-If you would like to define custom keyboard interactions that you can easily re-use throughout your test suite, you may use the `macro` method provided by the `Keyboard` class. Typically, you should call this method from a [service provider's](/docs/{{version}}/providers) `boot` method:
+If you would like to define custom keyboard interactions that you can easily re-use throughout your test suite, you may use the `macro` method provided by the `Keyboard` class. Typically, you should call this method from a [service provider's](/docs/{{version}}/architecture-concepts/providers) `boot` method:
 
 ```php
 <?php
@@ -1257,7 +1257,7 @@ The `waitForLocation` method can also be used to wait for the current window loc
 $browser->waitForLocation('https://example.com/path');
 ```
 
-You may also wait for a [named route's](/docs/{{version}}/routing#named-routes) location:
+You may also wait for a [named route's](/docs/{{version}}/basics/routing#named-routes) location:
 
 ```php
 $browser->waitForRoute($routeName, $parameters);
@@ -1596,7 +1596,7 @@ $browser->assertPathIsNot('/home');
 <a name="assert-route-is"></a>
 #### assertRouteIs
 
-Assert that the current URL matches the given [named route's](/docs/{{version}}/routing#named-routes) URL:
+Assert that the current URL matches the given [named route's](/docs/{{version}}/basics/routing#named-routes) URL:
 
 ```php
 $browser->assertRouteIs($name, $parameters);

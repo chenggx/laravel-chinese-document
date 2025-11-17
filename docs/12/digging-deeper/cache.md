@@ -40,7 +40,7 @@ The cache configuration file also contains a variety of other options that you m
 <a name="prerequisites-database"></a>
 #### Database
 
-When using the `database` cache driver, you will need a database table to contain the cache data. Typically, this is included in Laravel's default `0001_01_01_000001_create_cache_table.php` [database migration](/docs/{{version}}/migrations); however, if your application does not contain this migration, you may use the `make:cache-table` Artisan command to create it:
+When using the `database` cache driver, you will need a database table to contain the cache data. Typically, this is included in Laravel's default `0001_01_01_000001_create_cache_table.php` [database migration](/docs/{{version}}/database/migrations); however, if your application does not contain this migration, you may use the `make:cache-table` Artisan command to create it:
 
 ```shell
 php artisan make:cache-table
@@ -86,9 +86,9 @@ If needed, you may set the `host` option to a UNIX socket path. If you do this, 
 <a name="redis"></a>
 #### Redis
 
-Before using a Redis cache with Laravel, you will need to either install the PhpRedis PHP extension via PECL or install the `predis/predis` package (~2.0) via Composer. [Laravel Sail](/docs/{{version}}/sail) already includes this extension. In addition, official Laravel application platforms such as [Laravel Cloud](https://cloud.laravel.com) and [Laravel Forge](https://forge.laravel.com) have the PhpRedis extension installed by default.
+Before using a Redis cache with Laravel, you will need to either install the PhpRedis PHP extension via PECL or install the `predis/predis` package (~2.0) via Composer. [Laravel Sail](/docs/{{version}}/packages/sail) already includes this extension. In addition, official Laravel application platforms such as [Laravel Cloud](https://cloud.laravel.com) and [Laravel Forge](https://forge.laravel.com) have the PhpRedis extension installed by default.
 
-For more information on configuring Redis, consult its [Laravel documentation page](/docs/{{version}}/redis#configuration).
+For more information on configuring Redis, consult its [Laravel documentation page](/docs/{{version}}/database/redis#configuration).
 
 <a name="dynamodb"></a>
 #### DynamoDB
@@ -241,7 +241,7 @@ When using the `Cache::remember` method, some users may experience slow response
 
 The flexible method accepts an array that specifies how long the cached value is considered "fresh" and when it becomes "stale". The first value in the array represents the number of seconds the cache is considered fresh, while the second value defines how long it can be served as stale data before recalculation is necessary.
 
-If a request is made within the fresh period (before the first value), the cache is returned immediately without recalculation. If a request is made during the stale period (between the two values), the stale value is served to the user, and a [deferred function](/docs/{{version}}/helpers#deferred-functions) is registered to refresh the cached value after the response is sent to the user. If a request is made after the second value, the cache is considered expired, and the value is recalculated immediately, which may result in a slower response for the user:
+If a request is made within the fresh period (before the first value), the cache is returned immediately without recalculation. If a request is made during the stale period (between the two values), the stale value is served to the user, and a [deferred function](/docs/{{version}}/digging-deeper/helpers#deferred-functions) is registered to refresh the cached value after the response is sent to the user. If a request is made after the second value, the cache is considered expired, and the value is recalculated immediately, which may result in a slower response for the user:
 
 ```php
 $value = Cache::flexible('users', [5, 10], function () {
@@ -398,7 +398,7 @@ cache()->remember('users', $seconds, function () {
 ```
 
 > [!NOTE]
-> When testing calls to the global `cache` function, you may use the `Cache::shouldReceive` method just as if you were [testing the facade](/docs/{{version}}/mocking#mocking-facades).
+> When testing calls to the global `cache` function, you may use the `Cache::shouldReceive` method just as if you were [testing the facade](/docs/{{version}}/testing/testing/mocking#mocking-facades).
 
 <a name="cache-tags"></a>
 ## Cache Tags
@@ -561,7 +561,7 @@ When a cache store operation fails and failover is activated, Laravel will dispa
 <a name="writing-the-driver"></a>
 ### Writing the Driver
 
-To create our custom cache driver, we first need to implement the `Illuminate\Contracts\Cache\Store` [contract](/docs/{{version}}/contracts). So, a MongoDB cache implementation might look something like this:
+To create our custom cache driver, we first need to implement the `Illuminate\Contracts\Cache\Store` [contract](/docs/{{version}}/digging-deeper/contracts). So, a MongoDB cache implementation might look something like this:
 
 ```php
 <?php
@@ -635,14 +635,14 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-The first argument passed to the `extend` method is the name of the driver. This will correspond to your `driver` option in the `config/cache.php` configuration file. The second argument is a closure that should return an `Illuminate\Cache\Repository` instance. The closure will be passed an `$app` instance, which is an instance of the [service container](/docs/{{version}}/container).
+The first argument passed to the `extend` method is the name of the driver. This will correspond to your `driver` option in the `config/cache.php` configuration file. The second argument is a closure that should return an `Illuminate\Cache\Repository` instance. The closure will be passed an `$app` instance, which is an instance of the [service container](/docs/{{version}}/architecture-concepts/container).
 
 Once your extension is registered, update the `CACHE_STORE` environment variable or `default` option within your application's `config/cache.php` configuration file to the name of your extension.
 
 <a name="events"></a>
 ## Events
 
-To execute code on every cache operation, you may listen for various [events](/docs/{{version}}/events) dispatched by the cache:
+To execute code on every cache operation, you may listen for various [events](/docs/{{version}}/digging-deeper/events) dispatched by the cache:
 
 <div class="overflow-auto">
 

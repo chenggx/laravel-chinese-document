@@ -32,7 +32,7 @@ Laravel's `Illuminate\Http\Request` class provides an object-oriented way to int
 <a name="accessing-the-request"></a>
 ### Accessing the Request
 
-To obtain an instance of the current HTTP request via dependency injection, you should type-hint the `Illuminate\Http\Request` class on your route closure or controller method. The incoming request instance will automatically be injected by the Laravel [service container](/docs/{{version}}/container):
+To obtain an instance of the current HTTP request via dependency injection, you should type-hint the `Illuminate\Http\Request` class on your route closure or controller method. The incoming request instance will automatically be injected by the Laravel [service container](/docs/{{version}}/architecture-concepts/container):
 
 ```php
 <?php
@@ -128,7 +128,7 @@ if ($request->is('admin/*')) {
 }
 ```
 
-Using the `routeIs` method, you may determine if the incoming request has matched a [named route](/docs/{{version}}/routing#named-routes):
+Using the `routeIs` method, you may determine if the incoming request has matched a [named route](/docs/{{version}}/basics/routing#named-routes):
 
 ```php
 if ($request->routeIs('admin.*')) {
@@ -294,7 +294,7 @@ You may retrieve all of the incoming request's input data as an `array` using th
 $input = $request->all();
 ```
 
-Using the `collect` method, you may retrieve all of the incoming request's input data as a [collection](/docs/{{version}}/collections):
+Using the `collect` method, you may retrieve all of the incoming request's input data as a [collection](/docs/{{version}}/digging-deeper/collections):
 
 ```php
 $input = $request->collect();
@@ -370,7 +370,7 @@ $name = $request->input('user.name');
 <a name="retrieving-stringable-input-values"></a>
 #### Retrieving Stringable Input Values
 
-Instead of retrieving the request's input data as a primitive `string`, you may use the `string` method to retrieve the request data as an instance of [Illuminate\Support\Stringable](/docs/{{version}}/strings):
+Instead of retrieving the request's input data as a primitive `string`, you may use the `string` method to retrieve the request data as an instance of [Illuminate\Support\Stringable](/docs/{{version}}/digging-deeper/strings):
 
 ```php
 $name = $request->string('name')->trim();
@@ -601,12 +601,12 @@ $request->mergeIfMissing(['votes' => 0]);
 <a name="old-input"></a>
 ### Old Input
 
-Laravel allows you to keep input from one request during the next request. This feature is particularly useful for re-populating forms after detecting validation errors. However, if you are using Laravel's included [validation features](/docs/{{version}}/validation), it is possible that you will not need to manually use these session input flashing methods directly, as some of Laravel's built-in validation facilities will call them automatically.
+Laravel allows you to keep input from one request during the next request. This feature is particularly useful for re-populating forms after detecting validation errors. However, if you are using Laravel's included [validation features](/docs/{{version}}/basics/validation), it is possible that you will not need to manually use these session input flashing methods directly, as some of Laravel's built-in validation facilities will call them automatically.
 
 <a name="flashing-input-to-the-session"></a>
 #### Flashing Input to the Session
 
-The `flash` method on the `Illuminate\Http\Request` class will flash the current input to the [session](/docs/{{version}}/session) so that it is available during the user's next request to the application:
+The `flash` method on the `Illuminate\Http\Request` class will flash the current input to the [session](/docs/{{version}}/basics/session) so that it is available during the user's next request to the application:
 
 ```php
 $request->flash();
@@ -638,13 +638,13 @@ return redirect('/form')->withInput(
 <a name="retrieving-old-input"></a>
 #### Retrieving Old Input
 
-To retrieve flashed input from the previous request, invoke the `old` method on an instance of `Illuminate\Http\Request`. The `old` method will pull the previously flashed input data from the [session](/docs/{{version}}/session):
+To retrieve flashed input from the previous request, invoke the `old` method on an instance of `Illuminate\Http\Request`. The `old` method will pull the previously flashed input data from the [session](/docs/{{version}}/basics/session):
 
 ```php
 $username = $request->old('username');
 ```
 
-Laravel also provides a global `old` helper. If you are displaying old input within a [Blade template](/docs/{{version}}/blade), it is more convenient to use the `old` helper to repopulate the form. If no old input exists for the given field, `null` will be returned:
+Laravel also provides a global `old` helper. If you are displaying old input within a [Blade template](/docs/{{version}}/basics/blade), it is more convenient to use the `old` helper to repopulate the form. If no old input exists for the given field, `null` will be returned:
 
 ```blade
 <input type="text" name="username" value="{{ old('username') }}">
@@ -749,7 +749,7 @@ There are a variety of other methods available on `UploadedFile` instances. Chec
 <a name="storing-uploaded-files"></a>
 ### Storing Uploaded Files
 
-To store an uploaded file, you will typically use one of your configured [filesystems](/docs/{{version}}/filesystem). The `UploadedFile` class has a `store` method that will move an uploaded file to one of your disks, which may be a location on your local filesystem or a cloud storage location like Amazon S3.
+To store an uploaded file, you will typically use one of your configured [filesystems](/docs/{{version}}/digging-deeper/filesystem). The `UploadedFile` class has a `store` method that will move an uploaded file to one of your disks, which may be a location on your local filesystem or a cloud storage location like Amazon S3.
 
 The `store` method accepts the path where the file should be stored relative to the filesystem's configured root directory. This path should not contain a filename, since a unique ID will automatically be generated to serve as the filename.
 
@@ -770,7 +770,7 @@ $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
 ```
 
 > [!NOTE]
-> For more information about file storage in Laravel, check out the complete [file storage documentation](/docs/{{version}}/filesystem).
+> For more information about file storage in Laravel, check out the complete [file storage documentation](/docs/{{version}}/digging-deeper/filesystem).
 
 <a name="configuring-trusted-proxies"></a>
 ## Configuring Trusted Proxies
