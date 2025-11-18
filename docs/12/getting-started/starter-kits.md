@@ -46,7 +46,7 @@ npm install && npm run build
 composer run dev
 ```
 
-Once you have started the Laravel development server, your application will be accessible in your web browser at [http://localhost:8000](http://localhost:8000).
+Once you have started the Laravel development server, your application will be accessible in your web browser at ```http://localhost:8000```.
 
 <a name="available-starter-kits"></a>
 ## Available Starter Kits

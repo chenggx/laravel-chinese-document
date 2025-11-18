@@ -99,7 +99,7 @@ server {
 frankenphp php-server -r public/
 ```
 
-To take advantage of more powerful features supported by FrankenPHP, such as its [Laravel Octane](/docs/{{version}}/digging-deeper/packages/octane) integration, HTTP/3, modern compression, or the ability to package Laravel applications as standalone binaries, please consult FrankenPHP's [Laravel documentation](https://frankenphp.dev/docs/laravel/).
+To take advantage of more powerful features supported by FrankenPHP, such as its [Laravel Octane](/docs/{{version}}/packages/octane) integration, HTTP/3, modern compression, or the ability to package Laravel applications as standalone binaries, please consult FrankenPHP's [Laravel documentation](https://frankenphp.dev/docs/laravel/).
 
 <a name="directory-permissions"></a>
 ### Directory Permissions

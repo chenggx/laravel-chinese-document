@@ -108,7 +108,7 @@ First, if you write a class that implements an interface and you wish to type-hi
 <a name="simple-bindings"></a>
 #### Simple Bindings
 
-Almost all of your service container bindings will be registered within [service providers](/docs/{{version}}/architecture-conceptsproviders), so most of these examples will demonstrate using the container in that context.
+Almost all of your service container bindings will be registered within [service providers](/docs/{{version}}/architecture-concepts/providers), so most of these examples will demonstrate using the container in that context.
 
 Within a service provider, you always have access to the container via the `$this->app` property. We can register a binding using the `bind` method, passing the class or interface name that we wish to register along with a closure that returns an instance of the class:
 
@@ -200,7 +200,7 @@ class Transistor
 <a name="binding-scoped"></a>
 #### Binding Scoped Singletons
 
-The `scoped` method binds a class or interface into the container that should only be resolved one time within a given Laravel request / job lifecycle. While this method is similar to the `singleton` method, instances registered using the `scoped` method will be flushed whenever the Laravel application starts a new "lifecycle", such as when a [Laravel Octane](/docs/{{version}}/digging-deeper/packages/octane) worker processes a new request or when a Laravel [queue worker](/docs/{{version}}/digging-deeper/queues) processes a new job:
+The `scoped` method binds a class or interface into the container that should only be resolved one time within a given Laravel request / job lifecycle. While this method is similar to the `singleton` method, instances registered using the `scoped` method will be flushed whenever the Laravel application starts a new "lifecycle", such as when a [Laravel Octane](/docs/{{version}}/packages/octane) worker processes a new request or when a Laravel [queue worker](/docs/{{version}}/digging-deeper/queues) processes a new job:
 
 ```php
 use App\Services\Transistor;

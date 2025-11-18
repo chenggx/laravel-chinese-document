@@ -100,7 +100,7 @@ npm install && npm run build
 composer run dev
 ```
 
-Once you have started the development server, your application will be accessible in your web browser at [http://localhost:8000](http://localhost:8000). Next, you're ready to [start taking your next steps into the Laravel ecosystem](#next-steps). Of course, you may also want to [configure a database](#databases-and-migrations).
+Once you have started the development server, your application will be accessible in your web browser at ```http://localhost:8000```. Next, you're ready to [start taking your next steps into the Laravel ecosystem](#next-steps). Of course, you may also want to [configure a database](#databases-and-migrations).
 
 > [!NOTE]
 > If you would like a head start when developing your Laravel application, consider using one of our [starter kits](/docs/{{version}}/getting-started/starter-kits). Laravel's starter kits provide backend and frontend authentication scaffolding for your new Laravel application.

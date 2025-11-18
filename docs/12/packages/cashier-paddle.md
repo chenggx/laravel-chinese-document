@@ -1351,7 +1351,7 @@ To ensure your application can handle Paddle webhooks, be sure to [configure the
 - Subscription Canceled
 
 > [!WARNING]
-> Make sure you protect incoming requests with Cashier's included [webhook signature verification](/docs/{{version}}/cashier-paddle#verifying-webhook-signatures) middleware.
+> Make sure you protect incoming requests with Cashier's included [webhook signature verification](/docs/{{version}}/packages/cashier-paddle#verifying-webhook-signatures) middleware.
 
 <a name="webhooks-csrf-protection"></a>
 #### Webhooks and CSRF Protection

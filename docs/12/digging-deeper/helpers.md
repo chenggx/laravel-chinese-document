@@ -3546,7 +3546,7 @@ Sleep::assertNeverSlept();
 Sleep::assertInsomniac();
 ```
 
-Sometimes it may be useful to perform an action whenever a fake sleep occurs. To achieve this, you may provide a callback to the `whenFakingSleep` method. In the following example, we use Laravel's [time manipulation helpers](/docs/{{version}}/testing/testing/mocking#interacting-with-time) to instantly progress time by the duration of each sleep:
+Sometimes it may be useful to perform an action whenever a fake sleep occurs. To achieve this, you may provide a callback to the `whenFakingSleep` method. In the following example, we use Laravel's [time manipulation helpers](/docs/{{version}}/testing/mocking#interacting-with-time) to instantly progress time by the duration of each sleep:
 
 ```php
 use Carbon\CarbonInterval as Duration;

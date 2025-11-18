@@ -19,7 +19,7 @@ Laravel 及其其他第一方包遵循 [语义化版本控制](https://semver.or
 <a name="支持政策"></a>
 ## 支持政策
 
-对于所有 Laravel 发布版本，错误修复提供 18 个月，安全修复提供 2 年。对于所有附加库，只有最新的主要版本接收错误修复。此外，请查看 Laravel [支持的数据库版本](/docs/{{version}}/database/database/database#introduction)。
+对于所有 Laravel 发布版本，错误修复提供 18 个月，安全修复提供 2 年。对于所有附加库，只有最新的主要版本接收错误修复。此外，请查看 Laravel [支持的数据库版本](/docs/{{version}}/database/database#introduction)。
 
 <div class="overflow-auto">
 
