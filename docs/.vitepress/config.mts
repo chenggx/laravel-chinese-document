@@ -33,6 +33,20 @@ export default defineConfig({
     '12/(.*)': 'docs/12/(.*)'
   },
    vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            // 把较大的第三方库单独拆包
+             if (id.includes('.md')) {
+              // 一篇文档一个 chunk
+              return id.split('/').pop()!.replace('.md', '')
+            }
+            // 可按需要再细化
+          },
+        },
+      },
+    },
     plugins: [versionReplacePlugin()]
   },
   sitemap: {
