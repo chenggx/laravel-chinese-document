@@ -235,7 +235,7 @@ The `retry_interval`, `max_retries`, `backoff_algorithm`, `backoff_base`, and `b
 
 Redis connections can also be configured to use Unix sockets instead of TCP. This can offer improved performance by eliminating TCP overhead for connections to Redis instances on the same server as your application. To configure Redis to use a Unix socket, set your `REDIS_HOST` environment variable to the path of the Redis socket and the `REDIS_PORT` environment variable to `0`:
 
-```env
+```txt
 REDIS_HOST=/run/redis/redis.sock
 REDIS_PORT=0
 ```

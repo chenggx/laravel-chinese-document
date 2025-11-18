@@ -408,7 +408,7 @@ The `Servers` recorder captures CPU, memory, and storage usage of the servers th
 
 Each reporting server must have a unique name. By default, Pulse will use the value returned by PHP's `gethostname` function. If you wish to customize this, you may set the `PULSE_SERVER_NAME` environment variable:
 
-```env
+```txt
 PULSE_SERVER_NAME=load-balancer
 ```
 
@@ -464,7 +464,7 @@ For high-traffic applications, you may prefer to use a dedicated database connec
 
 You may customize the [database connection](/docs/{{version}}/database/database#configuration) used by Pulse by setting the `PULSE_DB_CONNECTION` environment variable.
 
-```env
+```txt
 PULSE_DB_CONNECTION=pulse
 ```
 

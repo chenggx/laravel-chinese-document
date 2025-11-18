@@ -309,7 +309,7 @@ If you need to handle more connections than a single server will allow, you may 
 
 To enable horizontal scaling, you should set the `REVERB_SCALING_ENABLED` environment variable to `true` in your application's `.env` configuration file:
 
-```env
+```txt
 REVERB_SCALING_ENABLED=true
 ```
 

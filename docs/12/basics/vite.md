@@ -624,7 +624,7 @@ Given the code above, prefetching will now begin when you manually dispatch the 
 
 If your Vite compiled assets are deployed to a domain separate from your application, such as via a CDN, you must specify the `ASSET_URL` environment variable within your application's `.env` file:
 
-```env
+```txt
 ASSET_URL=https://cdn.example.com
 ```
 
@@ -641,7 +641,7 @@ Remember that [absolute URLs are not re-written by Vite](#url-processing), so th
 
 You may inject environment variables into your JavaScript by prefixing them with `VITE_` in your application's `.env` file:
 
-```env
+```txt
 VITE_SENTRY_DSN_PUBLIC=http://example.com
 ```
 
@@ -927,7 +927,7 @@ If you are experiencing Cross-Origin Resource Sharing (CORS) issues in the brows
 
 The easiest way to allow a custom origin for your project is to ensure that your application's `APP_URL` environment variable matches the origin you are visiting in your browser. For example, if you visiting `https://my-app.laravel`, you should update your `.env` to match:
 
-```env
+```txt
 APP_URL=https://my-app.laravel
 ```
 
