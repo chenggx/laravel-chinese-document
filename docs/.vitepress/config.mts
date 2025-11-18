@@ -32,17 +32,32 @@ export default defineConfig({
     '11/(.*)': 'docs/11/(.*)',
     '12/(.*)': 'docs/12/(.*)'
   },
-   vite: {
+  vite: {
     build: {
+      chunkSizeWarningLimit: 1000,
       rollupOptions: {
         output: {
           manualChunks: (id) => {
             // 把较大的第三方库单独拆包
-             if (id.includes('.md')) {
-              // 一篇文档一个 chunk
+            if (id.includes('node_modules')) {
+              // 将 node_modules 中的包单独拆分
+              return 'vendor'
+            }
+            
+            if (id.includes('.md')) {
+              // 为不同的文档版本创建独立的 chunks
+              if (id.includes('/docs/11/')) {
+                return 'docs-11-' + id.split('/docs/11/')[1].split('/')[0]
+              }
+              if (id.includes('/docs/12/')) {
+                return 'docs-12-' + id.split('/docs/12/')[1].split('/')[0]
+              }
+              
+              // 其他文档默认处理
               return id.split('/').pop()!.replace('.md', '')
             }
-            // 可按需要再细化
+            
+            // 其他情况保持默认处理
           },
         },
       },
